@@ -9,6 +9,11 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return "Hello World gourmet";
+        return view('product.index');
+    }
+
+    public function create()
+    {
+        return "Hello World create";
     }
 }

@@ -42,6 +42,16 @@
     </style>
 </head>
 <body class="bg-dark">
+
+
+    @if(route('home') != url()->current())
+        @include('includes.sidebar')
+    @endif
+    <div class="row">
+        <div class="col-md-12 text-center pt-2">
+            <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
+        </div>
+    </div>
     <div class="container">
         @yield('content')
     </div>

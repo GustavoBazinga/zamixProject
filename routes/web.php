@@ -7,9 +7,9 @@ use App\Http\Controllers\EstoqueController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
-Route::resource('/produtos', ProdutoController::class);
+Route::resource('/product', ProdutoController::class);
 Route::resource('/funcionarios', FuncionarioController::class);
 Route::resource('/estoques', EstoqueController::class);
 //Route::resource('/produtos', ProdutoController::class);
