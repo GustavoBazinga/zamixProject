@@ -6,9 +6,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <title>Projeto Zamix</title>
     <style>
-        .container {
+        .containerHome {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,15 +23,7 @@
             margin-bottom: 50px;
         }
 
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .card {
+        .cardHome {
             width: 200px;
             height: 200px;
             margin: 20px;
@@ -43,17 +36,23 @@
 </head>
 <body class="bg-dark">
 
+        <div id="viewport">
+            <!-- Sidebar -->
+            @if(route('home') != url()->current())
+                @include('includes.sidebar')
+            @endif
 
-    @if(route('home') != url()->current())
-        @include('includes.sidebar')
-    @endif
-    <div class="row">
-        <div class="col-md-12 text-center pt-2">
-            <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
+            @if(route('home') == url()->current())
+                <div class="row">
+                    <div class="col-md-12 text-center pt-2">
+                        <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
+                    </div>
+                </div>
+            @endif
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
-    </div>
-    <div class="container">
-        @yield('content')
-    </div>
+
 </body>
 </html>

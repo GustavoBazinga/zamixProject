@@ -4324,7 +4324,7 @@ function buildURL(url, params, options) {
   if (!params) {
     return url;
   }
-  
+
   const _encode = options && options.encode || encode;
 
   const serializeFn = options && options.serialize;
@@ -4441,7 +4441,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   })() :
 
-// Non standard browser env (web workers, react-native) lack needed support.
+// Non standard browser env (web worker, react-native) lack needed support.
   (function nonStandardBrowserEnv() {
     return {
       write: function write() {},
@@ -4695,7 +4695,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   })() :
 
-  // Non standard browser envs (web workers, react-native) lack needed support.
+  // Non standard browser envs (web worker, react-native) lack needed support.
   (function nonStandardBrowserEnv() {
     return function isURLSameOrigin() {
       return true;
@@ -5389,7 +5389,7 @@ __webpack_require__.r(__webpack_exports__);
  * This allows axios to run in a web worker, and react-native.
  * Both environments support XMLHttpRequest, but not fully standard globals.
  *
- * web workers:
+ * web worker:
  *  typeof window -> undefined
  *  typeof document -> undefined
  *
@@ -6178,7 +6178,7 @@ const toJSONObject = (obj) => {
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -6192,14 +6192,14 @@ const toJSONObject = (obj) => {
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -6212,7 +6212,7 @@ const toJSONObject = (obj) => {
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -6224,12 +6224,12 @@ const toJSONObject = (obj) => {
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -6240,7 +6240,7 @@ const toJSONObject = (obj) => {
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.

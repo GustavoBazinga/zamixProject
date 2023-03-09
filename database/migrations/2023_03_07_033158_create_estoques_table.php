@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
+            $table->string('quantidadeRebecimento');
+            $table->string('quantidadeRestante');
+            $table->foreignId('produto_id')->constrained('produtos');
             $table->timestamps();
         });
     }
