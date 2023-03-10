@@ -12,4 +12,9 @@ class Funcionario extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nome', 'cpf'];
 
+    public function produtos()
+    {
+        return $this->belongsToMany(Produto::class, 'funcionario_produto', 'funcionario_id', 'produto_id')->withPivot('quantidade');
+    }
+
 }

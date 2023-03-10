@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Produto;
 
-class Estoque extends Model
+class Lote extends Model
 {
     use HasFactory;
-    protected $table = 'estoques';
-    protected $primaryKey = 'id';
-    protected $fillable = ['quantidadeRebecimento', 'quantidadeRestante', 'produto'];
-
+    protected $table = 'lotes';
+    protected $fillable = ['nome', 'precoCusto', 'precoVenda'];
 
     public function produto()
     {
