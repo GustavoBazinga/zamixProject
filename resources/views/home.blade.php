@@ -9,14 +9,14 @@
                         <img src="{{asset('images/iconProduct.png')}}" alt="" style="width: 150px">
                     </div>
                 </a>
-                <a href="">
+                <a href="{{route('worker.index')}}">
                     <div class="cardHome">
                         <img src="{{asset('images/iconWorkers.png')}}" alt="" style="width: 150px">
                     </div>
                 </a>
             </div>
             <div class="col-md-6 text-center">
-                <a href="">
+                <a href="{{ route('stock.index') }}">
                     <div class="cardHome">
                         <img src="{{asset('images/iconStock.png')}}" alt="" style="width: 150px">
                     </div>

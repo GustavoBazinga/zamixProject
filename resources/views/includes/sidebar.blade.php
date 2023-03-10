@@ -5,7 +5,7 @@
         </header>
         <ul class="nav">
             <li>
-                <a href="#">
+                <a href="">
                     <i class="zmdi zmdi-view-dashboard"></i> Início
                 </a>
             </li>

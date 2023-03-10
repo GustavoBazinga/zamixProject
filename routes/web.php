@@ -10,6 +10,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('/product', ProdutoController::class);
-Route::resource('/funcionarios', FuncionarioController::class);
-Route::resource('/estoques', EstoqueController::class);
+Route::resource('/worker', FuncionarioController::class);
+Route::resource('/stock', EstoqueController::class);
 //Route::resource('/produtos', ProdutoController::class);

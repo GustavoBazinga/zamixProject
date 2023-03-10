@@ -11,7 +11,8 @@ class Estoque extends Model
     use HasFactory;
     protected $table = 'estoques';
     protected $primaryKey = 'id';
-    protected $fillable = ['quantidadeRebecimento', 'quantidadeRestante'];
+    protected $fillable = ['quantidadeRebecimento', 'quantidadeRestante', 'produto'];
+
 
     public function produto()
     {

@@ -34,7 +34,7 @@
         }
     </style>
 </head>
-<body class="bg-dark">
+<body class="">
 
         <div id="viewport">
             <!-- Sidebar -->

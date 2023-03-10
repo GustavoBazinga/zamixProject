@@ -16,6 +16,35 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        return "Hello World create";
+        $produto = new Produto();
+        return view('product.create', compact("produto"));
+    }
+
+    public function store(Request $request)
+    {
+
+        Produto::create($request->all());
+        return redirect()->route('product.index');
+    }
+
+
+    public function edit($id)
+    {
+        $produto = Produto::find($id);
+        return view('product.edit')->with('produto', $produto);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $produto = Produto::find($id);
+        $produto->update($request->all());
+        return redirect()->route('product.index');
+    }
+
+    public function destroy($id)
+    {
+        $produto = Produto::find($id);
+        $produto->delete();
+        return redirect()->route('product.index');
     }
 }

@@ -4,7 +4,7 @@
             <h1>{{$title ?? null}}</h1>
         </div>
         <div class="card-body">
-            <a href="" class="btn btn-success btn-sm" title="Adicionar">
+            <a href="{{ $pathCreate }}" class="btn btn-success btn-sm" title="Adicionar">
                 Adicionar
             </a>
             <br/>
