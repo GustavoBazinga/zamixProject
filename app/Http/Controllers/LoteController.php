@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lote;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLoteRequest;
 use App\Http\Requests\UpdateLoteRequest;
+use App\Models\Produto;
+use App\Models\Lote;
+use App\http\Controllers\ProdutoController;
 
 class LoteController extends Controller
 {
@@ -14,7 +16,8 @@ class LoteController extends Controller
      */
     public function index()
     {
-        //
+        $lotes = Lote::all();
+        return view('pages.batch.index')->with('lotes', $lotes);
     }
 
     /**
@@ -22,7 +25,8 @@ class LoteController extends Controller
      */
     public function create()
     {
-        //
+        $produtos = Produto::all();
+        return view('pages.batch.create')->with('produtos', $produtos);
     }
 
     /**
@@ -30,7 +34,14 @@ class LoteController extends Controller
      */
     public function store(StoreLoteRequest $request)
     {
-        //
+        Lote::create([
+            'produto_id' => $request->produto_id,
+            'quantidadeRecebida' => $request->quantidadeRecebida,
+            'precoLote' => $request->precoLote
+        ]);
+        ProdutoController::updateQuantidade($request, $request->produto_id, $request->quantidadeRecebida);
+
+        return redirect()->route('batch.index');
     }
 
     /**

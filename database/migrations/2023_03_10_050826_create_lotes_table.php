@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('lotes', function (Blueprint $table) {
             $table->id();
-            $table->string('quantidadeRecebida');
+            $table->integer('quantidadeRecebida');
+            $table->float('precoLote');
             $table->foreignId('produto_id')->constrained('produtos');
             $table->timestamps();
 

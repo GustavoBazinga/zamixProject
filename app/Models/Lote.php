@@ -10,7 +10,7 @@ class Lote extends Model
 {
     use HasFactory;
     protected $table = 'lotes';
-    protected $fillable = ['nome', 'precoCusto', 'precoVenda'];
+    protected $fillable = ['produto_id', 'quantidadeRecebida', 'precoLote'] ;
 
     public function produto()
     {

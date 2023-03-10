@@ -11,7 +11,7 @@ class Produto extends Model
     use HasFactory;
     protected $table = 'produtos';
     protected $primaryKey = 'id';
-    protected $fillable = ['nome', 'precoCusto', 'precoVenda'];
+    protected $fillable = ['nome', 'precoCusto', 'precoVenda', 'quantidade'];
 
     public function lotes()
     {

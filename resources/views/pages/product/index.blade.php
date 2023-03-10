@@ -10,6 +10,7 @@
             <th>Nome</th>
             <th>Preço Custo</th>
             <th>Preço Venda</th>
+            <th>Quantidade</th>
         @endslot
         <!-- Dados especificos do body tabela -->
         @slot('bodyItems')
@@ -19,6 +20,7 @@
                     <td>{{ $item->nome }}</td>
                     <td>{{ $item->precoCusto }}</td>
                     <td>{{ $item->precoVenda }}</td>
+                    <td>{{ $item->quantidade }}</td>
                     <!-- Botões de editar e apagar -->
                     <td>
                         <a href="{{ url('/product/' . $item->id . '/edit') }}" title="Edit Product"><button class="btn btn-primary btn-sm">Editar</button></a>

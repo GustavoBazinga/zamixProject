@@ -11,13 +11,13 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-        return view('product.index')->with('produtos', $produtos);
+        return view('pages.product.index')->with('produtos', $produtos);
     }
 
     public function create()
     {
         $produto = new Produto();
-        return view('product.create', compact("produto"));
+        return view('pages.product.create', compact("produto"));
     }
 
     public function store(Request $request)
@@ -29,7 +29,7 @@ class ProdutoController extends Controller
     public function edit($id)
     {
         $produto = Produto::find($id);
-        return view('product.edit')->with('produto', $produto);
+        return view('pages.product.edit')->with('produto', $produto);
     }
 
     public function update(Request $request, $id)
@@ -37,6 +37,13 @@ class ProdutoController extends Controller
         $produto = Produto::find($id);
         $produto->update($request->all());
         return redirect()->route('product.index');
+    }
+
+    static function updateQuantidade(Request $request, $id, $quantidade = 0)
+    {
+        $produto = Produto::find($id);
+        $produto->quantidade = $produto->quantidade + $quantidade;
+        $produto->update($request->all());
     }
 
     public function destroy($id)

@@ -23,8 +23,8 @@
             </div>
             <div class="col-md-6 text-center">
 
-                <!-- CRUD de estoque -->
-                <a href="{{ route('stock.index') }}">
+                <!-- CRUD de lotes -->
+                <a href="{{ route('batch.index') }}">
                     <div class="cardHome">
                         <img src="{{asset('images/iconStock.png')}}" alt="" style="width: 150px">
                     </div>
