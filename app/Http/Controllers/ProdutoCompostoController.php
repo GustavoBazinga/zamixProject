@@ -14,7 +14,9 @@ class ProdutoCompostoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.product.productComposite.index', [
+            'productComposed' => ProdutoComposto::all(),
+        ]);
     }
 
     /**
