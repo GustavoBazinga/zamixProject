@@ -19,3 +19,5 @@ Route::resource('/product-composite', ProdutoCompostoController::class);
 Route::get('/request/request', [FuncionarioProdutoController::class, 'index_request'])->name('request.index_request');
 
 Route::resource('/request', FuncionarioProdutoController::class);
+
+Route::get('/getProdutos', [ProdutoController::class, 'getProdutos'])->name('getProdutos');

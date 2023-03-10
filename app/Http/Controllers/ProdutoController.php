@@ -14,6 +14,11 @@ class ProdutoController extends Controller
         return view('pages.product.index')->with('produtos', $produtos);
     }
 
+    static public function getProdutos($id)
+    {
+        $dados = Produto::all();
+        return response()->json($dados);
+    }
     public function create()
     {
         $produto = new Produto();
