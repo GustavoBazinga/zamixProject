@@ -1,7 +1,9 @@
 @extends('layout.layout')
-
+<!-- Página principal de produto - GET -->
 @section('content')
+    <!-- Componente da tabela -->
     @component('components.tableCrud')
+        <!-- Dados especificos do header tabela -->
         @slot('title', 'Produtos')
         @slot('pathCreate', route('product.create'))
         @slot('headerItems')
@@ -9,6 +11,7 @@
             <th>Preço Custo</th>
             <th>Preço Venda</th>
         @endslot
+        <!-- Dados especificos do body tabela -->
         @slot('bodyItems')
             @foreach($produtos as $item)
                 <tr>
@@ -16,8 +19,9 @@
                     <td>{{ $item->nome }}</td>
                     <td>{{ $item->precoCusto }}</td>
                     <td>{{ $item->precoVenda }}</td>
+                    <!-- Botões de editar e apagar -->
                     <td>
-                        <a href="{{ url('/product/' . $item->id . '/edit') }}" title="Edit Product"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</button></a>
+                        <a href="{{ url('/product/' . $item->id . '/edit') }}" title="Edit Product"><button class="btn btn-primary btn-sm">Editar</button></a>
                         <form method="POST" action="{{ url('/product' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             @csrf

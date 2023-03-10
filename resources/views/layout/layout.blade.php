@@ -38,17 +38,19 @@
 
         <div id="viewport">
             <!-- Sidebar -->
+
+            <!--A home page não possui o sidebar, por isso o if-->
             @if(route('home') != url()->current())
                 @include('includes.sidebar')
-            @endif
-
-            @if(route('home') == url()->current())
+            @else
+                <!-- Somente a home page possui a logo -->
                 <div class="row">
                     <div class="col-md-12 text-center pt-2">
                         <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
                     </div>
                 </div>
             @endif
+            <!-- Corpo de pagina -->
             <div class="container">
                 @yield('content')
             </div>

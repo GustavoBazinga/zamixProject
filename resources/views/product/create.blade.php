@@ -1,10 +1,13 @@
 @extends('layout.layout')
+<!-- Página de criar um novo produto - POST -->
 @section('content')
-
+    <!-- Componente de criar -->
     @component('components.create')
+        <!-- Dados especificos do header -->
         @slot('title', 'Produto')
         @slot('url', route('product.store'))
         @slot('pathIndex', route('product.index'))
+        <!-- Dados especificos dos inputs -->
         @slot('formInput')
             <div class="form-group">
                 <label for="nome">Nome</label>

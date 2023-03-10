@@ -22,11 +22,9 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-
         Produto::create($request->all());
         return redirect()->route('product.index');
     }
-
 
     public function edit($id)
     {
