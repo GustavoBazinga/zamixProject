@@ -31,7 +31,7 @@
                 </a>
 
                 <!-- CRUD de requisições -->
-                <a href="">
+                <a href="{{route('request.index')}}">
                     <div class="cardHome">
                         <img src="{{asset('images/iconRequest.png')}}" alt="" style="width: 150px">
                     </div>

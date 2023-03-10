@@ -6,6 +6,8 @@ use App\Models\FuncionarioProduto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFuncionarioProdutoRequest;
 use App\Http\Requests\UpdateFuncionarioProdutoRequest;
+use App\Models\Produto;
+use App\Models\ProdutoComposto;
 
 class FuncionarioProdutoController extends Controller
 {
@@ -14,7 +16,14 @@ class FuncionarioProdutoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.request.home');
+    }
+
+    public function index_request()
+    {
+        $Produtos = Produto::all();
+        $ProdutosCompostos = ProdutoComposto::all();
+        return view('pages.request.request.index')->with('produtos', $Produtos)->with('produtosCompostos', $ProdutosCompostos);
     }
 
     /**
