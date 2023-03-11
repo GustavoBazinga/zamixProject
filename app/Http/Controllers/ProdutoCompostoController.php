@@ -91,6 +91,8 @@ class ProdutoCompostoController extends Controller
      */
     public function destroy(ProdutoComposto $produtoComposto)
     {
-        //
+        $produtoComposto = ProdutoComposto::find($produtoComposto->id);
+        $produtoComposto->delete();
+        return redirect()->route('worker.index');
     }
 }
