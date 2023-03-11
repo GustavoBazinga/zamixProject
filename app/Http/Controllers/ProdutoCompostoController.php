@@ -9,6 +9,7 @@ use App\Http\Requests\StoreProdutoCompostoRequest;
 use App\Http\Requests\UpdateProdutoCompostoRequest;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request as HttpRequest;
+use App\Models\ProdutoProdutoComposto;
 
 class ProdutoCompostoController extends Controller
 {
@@ -48,7 +49,8 @@ class ProdutoCompostoController extends Controller
     public function show($id)
     {
         $produtoComposto = ProdutoComposto::find($id);
-        return view('pages.product.show')->with('produto', $produtoComposto);
+        $produtoProdutoComposto = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
+        return view('pages.product.show')->with('produto', $produtoComposto)->with('produtoProdutoComposto', $produtoProdutoComposto);
     }
 
     /**

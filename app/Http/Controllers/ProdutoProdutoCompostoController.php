@@ -43,6 +43,12 @@ class ProdutoProdutoCompostoController extends Controller
         redirect()->route('product.index');
     }
 
+    static public function getAllProdutos(Request $request, $id)
+    {
+        $produtos_id = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
+        dd($produtos_id);
+    }
+
     /**
      * Display the specified resource.
      */

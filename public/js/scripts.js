@@ -87,7 +87,23 @@ function getProdutoList(){
     };
     xhttp.open("GET", "http://localhost:8000/getProdutos", true);
     xhttp.send();
+}
 
+function mountProductCompsite(id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText);
+            divFormGroup = document.createElement('div');
+            divFormGroup.setAttribute('class', 'form-group');
+            divFormGroup.innerHTML = `
+                <label for="">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" value="0" disabled>
 
-
+            `
+        }
+        ;
+        xhttp.open("GET", "http://localhost:8000/getProdutos", true);
+        xhttp.send();
+    }
 }
