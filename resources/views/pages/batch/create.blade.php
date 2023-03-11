@@ -20,7 +20,7 @@
                     </optgroup>
                     <optgroup label="Produtos Compostos">
                         @foreach($produtosCompostos as $produto)
-                            <option value="PD-{{$produto->id}}">{{$produto->nome}}</option>
+                            <option value="PC-{{$produto->id}}">{{$produto->nome}}</option>
                         @endforeach
                     </optgroup>
                 </select>

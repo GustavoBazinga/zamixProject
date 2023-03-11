@@ -16,4 +16,9 @@ class ProdutoComposto extends Model
     {
         return $this->belongsToMany(Produto::class, 'produto_produto_composto', 'produto_composto_id', 'produto_id')->withPivot('quantidade');
     }
+
+    public function lotes()
+    {
+        return $this->hasMany(Lote::class);
+    }
 }

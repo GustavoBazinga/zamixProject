@@ -8,8 +8,11 @@ use App\Http\Requests\UpdateLoteRequest;
 use App\Models\Produto;
 use App\Models\Lote;
 use App\http\Controllers\ProdutoController;
+use App\Models\ProdutoProdutoComposto;
 use Illuminate\Http\Request;
 use App\Models\ProdutoComposto;
+use App\Http\Controllers\ProdutoProdutoCompostoController;
+
 
 class LoteController extends Controller
 {
@@ -18,8 +21,15 @@ class LoteController extends Controller
      */
     public function index()
     {
-        $lotes = Lote::all();
-        return view('pages.batch.index')->with('lotes', $lotes);
+        $lotesSimples = Lote::where('produto_id', '!=', null)->get();
+        for ($i = 0; $i < count($lotesSimples); $i++) {
+            $lotesSimples[$i]["nome_produto"] = ProdutoController::getNomeProduto($lotesSimples[$i]->produto_id);
+        }
+        $lotesCompostos = Lote::where('produto_composto_id', '!=', null)->get();
+        for ($i = 0; $i < count($lotesCompostos); $i++) {
+            $lotesCompostos[$i]->produtoComposto = ProdutoCompostoController::getNomeProdutoComposto($lotesCompostos[$i]->produto_composto_id);
+        }
+        return view('pages.batch.index')->with('lotesSimples', $lotesSimples)->with('lotesCompostos', $lotesCompostos);
     }
 
     /**
@@ -37,12 +47,31 @@ class LoteController extends Controller
      */
     public function store(StoreLoteRequest $request)
     {
-        Lote::create([
-            'produto_id' => $request->produto_id,
-            'quantidadeRecebida' => $request->quantidadeRecebida,
-            'precoLote' => $request->precoLote
-        ]);
-        ProdutoController::updateQuantidade($request, $request->produto_id, $request->quantidadeRecebida);
+        if (str_contains($request->produto_id, 'PC-')) {
+            var_dump($request->produto_id);
+            $request->produto_id = str_replace('PC-', '', $request->produto_id);
+            Lote::create([
+                'produto_id' => null,
+                'produto_composto_id' => $request->produto_id,
+                'quantidadeRecebida' => $request->quantidadeRecebida,
+                'precoLote' => $request->precoLote
+            ]);
+            $produtos = ProdutoProdutoCompostoController::getAllProdutos($request, $request->produto_id);
+
+            for($i = 0; $i < count($produtos); $i++) {
+                $produto = Produto::where('nome', $produtos[$i][0])->get();
+                ProdutoController::updateQuantidade($request, $produto[0]->id, $produtos[$i][1] * $request->quantidadeRecebida);
+            }
+        }else{
+            Lote::create([
+                'produto_id' => $request->produto_id,
+                'produto_composto_id' => null,
+                'quantidadeRecebida' => $request->quantidadeRecebida,
+                'precoLote' => $request->precoLote
+            ]);
+            ProdutoController::updateQuantidade($request, $request->produto_id, $request->quantidadeRecebida);
+        }
+
 
         return redirect()->route('batch.index');
     }

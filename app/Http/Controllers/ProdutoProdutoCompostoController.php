@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProdutoProdutoCompostoRequest;
 use App\Http\Requests\UpdateProdutoProdutoCompostoRequest;
 use Illuminate\Http\Request;
+use App\Models\Produto;
 
 class ProdutoProdutoCompostoController extends Controller
 {
@@ -46,7 +47,15 @@ class ProdutoProdutoCompostoController extends Controller
     static public function getAllProdutos(Request $request, $id)
     {
         $produtos_id = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
-        dd($produtos_id);
+        $produtos = [];
+        for($i = 0; $i < count($produtos_id); $i++) {
+            $produtoBruto = Produto::where('id', $produtos_id[$i]->produto_id)->get();
+            $produtos[$i] = [
+                $produtoBruto[0]->nome,
+                $produtos_id[$i]->quantidade
+            ];
+        }
+        return $produtos;
     }
 
     /**

@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('quantidadeRecebida');
             $table->float('precoLote');
-            $table->foreignId('produto_id')->constrained('produtos');
+            $table->foreignId('produto_id')->nullable()->constrained('produtos');
+            $table->foreignId('produto_composto_id')->nullable()->constrained('produto_composto');
             $table->timestamps();
 
-            /* UM LOTE NECESSITA DE UM PRODUTO */
-            $table->unsignedBigInteger('produto_id')->nullable(false)->change();
         });
     }
 

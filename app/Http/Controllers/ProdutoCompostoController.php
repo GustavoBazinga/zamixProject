@@ -63,6 +63,12 @@ class ProdutoCompostoController extends Controller
         //
     }
 
+    static function getNomeProdutoComposto($id)
+    {
+        $produto = ProdutoComposto::find($id);
+        return $produto->nome;
+    }
+
     /**
      * Update the specified resource in storage.
      */
