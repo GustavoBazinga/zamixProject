@@ -29,7 +29,10 @@ class LoteController extends Controller
         for ($i = 0; $i < count($lotesCompostos); $i++) {
             $lotesCompostos[$i]->produtoComposto = ProdutoCompostoController::getNomeProdutoComposto($lotesCompostos[$i]->produto_composto_id);
         }
-        return view('pages.batch.index')->with('lotesSimples', $lotesSimples)->with('lotesCompostos', $lotesCompostos);
+        // Merge the two arrays
+        $lotes = $lotesSimples->merge($lotesCompostos);
+
+        return view('pages.batch.index')->with('lotes', $lotes);
     }
 
     /**
@@ -48,7 +51,7 @@ class LoteController extends Controller
     public function store(StoreLoteRequest $request)
     {
         if (str_contains($request->produto_id, 'PC-')) {
-            var_dump($request->produto_id);
+
             $request->produto_id = str_replace('PC-', '', $request->produto_id);
             Lote::create([
                 'produto_id' => null,
