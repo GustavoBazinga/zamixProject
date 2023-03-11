@@ -21,3 +21,5 @@ Route::get('/request/request', [FuncionarioProdutoController::class, 'index_requ
 Route::resource('/request', FuncionarioProdutoController::class);
 
 Route::get('/getProdutos', [ProdutoController::class, 'getProdutos'])->name('getProdutos');
+
+Route::get('/getSubProdutos/{id}', [ProdutoCompostoController::class, 'getSubProdutos'])->name('getSubProdutos');

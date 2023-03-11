@@ -1,6 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
+    @slot('onloadPath', 'mountProductCompsite({{ $produto->id }})')
     @component('components.show')
         @slot('title', 'Visualizar Produto')
         @slot('editPath', route('product.edit', $produto->id))
@@ -9,12 +10,16 @@
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" value="{{ $produto->nome }}" disabled>
             </div>
-
-            <label for="divProdutos">Produtos</label>
-            <div name="divProdutos" onload="mountProductCompsite({{$produto->id}})">
+            <div name="divProdutos" id="divProdutos">
 
             </div>
         @endslot
-        <script src="{{ asset('js/scripts.js')}}"></script>
+
     @endcomponent
+    <script src="{{ asset('js/scripts.js')}}"></script>
+    <script>
+        console.log('teste');
+        const divProdutos = document.querySelector('#divProdutos');
+        divProdutos.addEventListener('load', mountProductCompsite({{ $produto->id }}));
+    </script>
 @endsection

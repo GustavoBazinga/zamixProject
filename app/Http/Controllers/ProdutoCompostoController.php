@@ -69,6 +69,15 @@ class ProdutoCompostoController extends Controller
         return $produto->nome;
     }
 
+    static public function getSubProdutos($id)
+    {
+        $dados = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
+        for ($i = 0; $i < count($dados); $i++) {
+            $dados[$i]->nome = ProdutoController::getNomeProduto($dados[$i]->produto_id);
+        }
+        return $dados;
+    }
+
     /**
      * Update the specified resource in storage.
      */

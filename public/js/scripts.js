@@ -1,6 +1,5 @@
-
-divMountPage = document.querySelector('#mountPage');
 function alteraTipo(value) {
+    let divMountPage = document.querySelector('#mountPage');
     limpaElemento(divMountPage)
     document.querySelector('#nome').value = '';
     if (value == '1') {
@@ -60,6 +59,7 @@ function limpaElemento(element){
 }
 
 function getProdutoList(){
+    let divMountPage = document.querySelector('#mountPage');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -93,21 +93,47 @@ function getProdutoList(){
     xhttp.send();
 }
 
+
+
 function mountProductCompsite(id) {
+    let divProdutos = document.querySelector('#divProdutos');
+    console.log(id);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             response = JSON.parse(this.responseText);
+            console.log(response)
             divFormGroup = document.createElement('div');
             divFormGroup.setAttribute('class', 'form-group');
             divFormGroup.innerHTML = `
-                <label for="">Quantidade</label>
-                <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" value="0" disabled>
-
+                <div class="form-group">
+                <label for="">Produtos</label>
+                </div>
             `
+            for (i = 0; i < response.length; i++) {
+                divFormGroup.innerHTML += `
+                    <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="produto${i}">Produto #${i + 1}</label>
+                            <input type="text" class="form-control" id="produto${i}" name="produto${i}" placeholder="Produto" value="${response[i].nome}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="quantidade${i}">Quantidade</label>
+                            <input type="number" class="form-control" id="quantidade${i}" name="quantidade${i}" placeholder="Quantidade" value="${response[i].quantidade}" disabled>
+                        </div>
+                    </div>
+                    </div>
+                   `
+
+            }
+            divProdutos.appendChild(divFormGroup);
         }
-        ;
-        xhttp.open("GET", "http://localhost:8000/getProdutos", true);
-        xhttp.send();
     }
+    console.log("Line 114")
+    xhttp.open("GET", "http://localhost:8000/getSubProdutos/" + id, true);
+    xhttp.send();
 }
+

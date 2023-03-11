@@ -34,7 +34,7 @@
         }
     </style>
 </head>
-<body class="">
+<body onload="{{ $onloadPath ?? null }}">
 
         <div id="viewport">
             <!-- Sidebar -->
