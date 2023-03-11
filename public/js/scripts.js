@@ -2,60 +2,32 @@
 divMountPage = document.querySelector('#mountPage');
 function alteraTipo(value) {
     limpaElemento(divMountPage)
+    document.querySelector('#nome').value = '';
     if (value == '1') {
         divFormGroup = document.createElement('div');
         divFormGroup.setAttribute('class', 'form-group');
-        labelQuantidade = document.createElement('label');
-        labelQuantidade.setAttribute('for', 'quantidade');
-        labelQuantidade.innerHTML = 'Quantidade';
-        inputQuantidade = document.createElement('input');
-        inputQuantidade.setAttribute('type', 'number');
-        inputQuantidade.setAttribute('class', 'form-control');
-        inputQuantidade.setAttribute('id', 'quantidade');
-        inputQuantidade.setAttribute('name', 'quantidade');
-        inputQuantidade.setAttribute('placeholder', 'Quantidade');
-        inputQuantidade.setAttribute('value', "0");
-        inputQuantidade.disabled = true;
-        divFormGroup.appendChild(labelQuantidade);
-        divFormGroup.appendChild(inputQuantidade);
+        divFormGroup.innerHTML = `
+            <label for="quantidade">Quantidade</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade" value="0" disabled>
+
+        `
         divMountPage.appendChild(divFormGroup);
 
         divFormGroup = document.createElement('div');
         divFormGroup.setAttribute('class', 'form-group');
-        labelPrecoCusto = document.createElement('label');
-        labelPrecoCusto.setAttribute('for', 'precoCusto');
-        labelPrecoCusto.innerHTML = 'Preço de Custo';
-        inputPrecoCusto = document.createElement('input');
-        inputPrecoCusto.setAttribute('type', 'number');
-        inputPrecoCusto.setAttribute('class', 'form-control');
-        inputPrecoCusto.setAttribute('id', 'precoCusto');
-        inputPrecoCusto.setAttribute('name', 'precoCusto');
-        inputPrecoCusto.setAttribute('placeholder', 'Preço de Custo');
-        inputPrecoCusto.setAttribute('min', "0");
-        inputPrecoCusto.setAttribute('step', "0.01");
 
-        divFormGroup.appendChild(labelPrecoCusto);
-        divFormGroup.appendChild(inputPrecoCusto);
-
+        divFormGroup.innerHTML = `
+            <label for="precoCusto">Preço de Custo</label>
+            <input type="number" class="form-control" id="precoCusto" name="precoCusto" placeholder="Preço de Custo" value="0" min="0" step="0.01">
+        `
         divMountPage.appendChild(divFormGroup);
 
         divFormGroup = document.createElement('div');
         divFormGroup.setAttribute('class', 'form-group');
-        labelPrecoVenda = document.createElement('label');
-        labelPrecoVenda.setAttribute('for', 'precoVenda');
-        labelPrecoVenda.innerHTML = 'Preço de Venda';
-        inputPrecoVenda = document.createElement('input');
-        inputPrecoVenda.setAttribute('type', 'number');
-        inputPrecoVenda.setAttribute('class', 'form-control');
-        inputPrecoVenda.setAttribute('id', 'precoVenda');
-        inputPrecoVenda.setAttribute('name', 'precoVenda');
-        inputPrecoVenda.setAttribute('placeholder', 'Preço de Venda');
-        inputPrecoVenda.setAttribute('min', "0");
-        inputPrecoVenda.setAttribute('step', "0.01");
-
-        divFormGroup.appendChild(labelPrecoVenda);
-        divFormGroup.appendChild(inputPrecoVenda);
-
+        divFormGroup.innerHTML = `
+            <label for="precoVenda">Preço de Venda</label>
+            <input type="number" class="form-control" id="precoVenda" name="precoVenda" placeholder="Preço de Venda" value="0" min="0" step="0.01">
+        `
         divMountPage.appendChild(divFormGroup);
 
     }
@@ -66,7 +38,7 @@ function alteraTipo(value) {
         btnAdd.setAttribute('type', 'button');
         btnAdd.setAttribute('class', 'btn btn-primary btn-sm');
         btnAdd.setAttribute('id', 'btnAdd');
-        btnAdd.setAttribute('onclick', 'addProduto()');
+        btnAdd.setAttribute('onclick', 'getProdutoList()');
         btnAdd.innerHTML = 'Adicionar Produto';
         divFormGroup.appendChild(btnAdd);
         divMountPage.appendChild(divFormGroup);
@@ -83,14 +55,39 @@ function limpaElemento(element){
     }
 }
 
-// function addProduto(){
-//     ajax = new XMLHttpRequest();
-//     ajax.open('GET', 'http://localhost:8080/getProdutos', true);
-//     ajax.responseType = 'json';
-//     ajax.send();
-//
-//     ajax.onreadystatechange = function(){
-//
-//
-//     }
-// }
+function getProdutoList(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText);
+            divFormGroup = document.createElement('div');
+            divFormGroup.setAttribute('class', 'form-group');
+            count = divMountPage.childElementCount;
+            options = '<option value="0">Selecione um Produto</option>';
+            for (i = 0; i < response.length; i++) {
+                options += `<option value="${response[i].id}">${response[i].nome}</option>`
+            }
+            divFormGroup.innerHTML =`
+                <label for="produto">Produto #${ count }</label>
+                <select class="form-control" id="produto${ count }" name="produto${count}" placeholder="Produto" value="0">
+                    ${options}
+                `
+
+
+            divFormGroup.innerHTML += `</select>`
+            divFormGroup.innerHTML += `
+                <label for="quantidade">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade${ count }" name="quantidade${count}" placeholder="Quantidade" value="1" min="1">
+            `
+
+            divMountPage.appendChild(divFormGroup);
+
+
+        }
+    };
+    xhttp.open("GET", "http://localhost:8000/getProdutos", true);
+    xhttp.send();
+
+
+
+}

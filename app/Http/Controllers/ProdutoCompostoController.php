@@ -6,6 +6,8 @@ use App\Models\ProdutoComposto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProdutoCompostoRequest;
 use App\Http\Requests\UpdateProdutoCompostoRequest;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request as HttpRequest;
 
 class ProdutoCompostoController extends Controller
 {
@@ -30,9 +32,12 @@ class ProdutoCompostoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProdutoCompostoRequest $request)
+    static public function store(HttpRequest $request)
     {
-        //
+        $produtoComposto = ProdutoComposto::create([
+            'nome' => $request->nome,
+        ]);
+        ProdutoProdutoCompostoController::store($request, $produtoComposto->id);
     }
 
     /**

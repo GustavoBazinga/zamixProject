@@ -9,7 +9,7 @@
         @slot('pathIndex', route('product.index'))
         <!-- Dados especificos dos inputs -->
         @slot('formInput')
-            <!-- Radiobuttom para selecionar entre Simples e Composto -->
+            <!-- Radiobutton para selecionar entre Simples e Composto -->
             <div class="form-check">
                 <input class="form-check-input" value=1 type="radio" name="produtosRadio" id="produtoSimples" checked onchange="alteraTipo(this.value)">
                 <label class="form-check-label" for="produtoSimples">

@@ -6,6 +6,7 @@ use App\Models\ProdutoProdutoComposto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProdutoProdutoCompostoRequest;
 use App\Http\Requests\UpdateProdutoProdutoCompostoRequest;
+use Illuminate\Http\Request;
 
 class ProdutoProdutoCompostoController extends Controller
 {
@@ -28,9 +29,18 @@ class ProdutoProdutoCompostoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProdutoProdutoCompostoRequest $request)
+    static public function store(Request $request, $id)
     {
-        //
+        $cont = 0;
+        for($i = 3; $i < count($request->all()); $i += 2) {
+            $index = floor($i / 2);
+            $produto = ProdutoProdutoComposto::create([
+                'produto_composto_id' => $id,
+                'produto_id' => $request->all()["produto$index"],
+                'quantidade' => $request->all()["quantidade$index"],
+            ]);
+        }
+        redirect()->route('product.index');
     }
 
     /**

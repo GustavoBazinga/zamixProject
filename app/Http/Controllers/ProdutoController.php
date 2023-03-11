@@ -14,10 +14,10 @@ class ProdutoController extends Controller
         return view('pages.product.index')->with('produtos', $produtos);
     }
 
-    static public function getProdutos($id)
+    static public function getProdutos()
     {
         $dados = Produto::all();
-        return response()->json($dados);
+        return $dados;
     }
     public function create()
     {
@@ -27,7 +27,18 @@ class ProdutoController extends Controller
 
     public function store(Request $request)
     {
-        Produto::create($request->all());
+        $type = $request->produtosRadio;
+        if ($type == 1){
+            Produto::create([
+                'nome' => $request->nome,
+                'quantidade' => 0,
+                'precoCusto' => $request->precoCusto,
+                'precoVenda' => $request->precoVenda,
+            ]);
+
+        } else {
+            ProdutoCompostoController::store($request);
+        }
         return redirect()->route('product.index');
     }
 

@@ -39,7 +39,7 @@ class FuncionarioProdutoController extends Controller
      */
     public function store(StoreFuncionarioProdutoRequest $request)
     {
-        //
+
     }
 
     /**
