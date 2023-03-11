@@ -12,10 +12,9 @@
                 {{ $formInput ?? null}}
                 <button class="btn btn-secondary">Cancelar</button>
                 <button type="submit" class="btn btn-primary">
-                    Edtar
+                    Editar
                 </button>
             </form>
         </div>
-
     </div>
 </div>

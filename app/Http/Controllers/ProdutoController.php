@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use App\Models\ProdutoComposto;
 
 class ProdutoController extends Controller
 {
     public function index()
     {
         $produtos = Produto::all();
-        return view('pages.product.index')->with('produtos', $produtos);
+        $produtosCompostos = ProdutoComposto::all();
+        return view('pages.product.index')->with('produtos', $produtos)->with('produtosCompostos', $produtosCompostos);
     }
 
     static public function getProdutos()
@@ -19,10 +21,12 @@ class ProdutoController extends Controller
         $dados = Produto::all();
         return $dados;
     }
+
+
     public function create()
     {
         $produto = new Produto();
-        return view('pages.product.create', compact("produto"));
+        return view('pages.product.create')->with('produto', $produto);
     }
 
     public function store(Request $request)

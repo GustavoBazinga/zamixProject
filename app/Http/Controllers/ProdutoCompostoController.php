@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produto;
 use App\Models\ProdutoComposto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProdutoCompostoRequest;
@@ -43,9 +44,11 @@ class ProdutoCompostoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProdutoComposto $produtoComposto)
+
+    public function show($id)
     {
-        //
+        $produtoComposto = ProdutoComposto::find($id);
+        return view('pages.product.show')->with('produto', $produtoComposto);
     }
 
     /**

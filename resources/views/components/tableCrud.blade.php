@@ -13,7 +13,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width: 2%">#</th>
                             {{ $headerItems ?? null}}
                             <th>Ações</th>
                         </tr>
