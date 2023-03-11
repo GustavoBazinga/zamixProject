@@ -42,7 +42,7 @@
         @slot('title', 'Produtos Compostos')
         @slot('pathCreate', route('product.create'))
         @slot('headerItems')
-            <th style="width: 80%">Nome</th>
+            <th style="width: 70%">Nome</th>
         @endslot
         @slot('bodyItems')
             @foreach($produtosCompostos as $item)

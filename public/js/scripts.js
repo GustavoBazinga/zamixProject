@@ -112,17 +112,17 @@ function mountProductCompsite(id) {
             `
             for (i = 0; i < response.length; i++) {
                 divFormGroup.innerHTML += `
-                    <div class="row">
-                    <div class="col-8">
+                    <div class="row pl-4">
+                    <div class="col-10">
                         <div class="form-group">
                             <label for="produto${i}">Produto #${i + 1}</label>
                             <input type="text" class="form-control" id="produto${i}" name="produto${i}" placeholder="Produto" value="${response[i].nome}" disabled>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-2">
                         <div class="form-group">
                             <label for="quantidade${i}">Quantidade</label>
-                            <input type="number" class="form-control" id="quantidade${i}" name="quantidade${i}" placeholder="Quantidade" value="${response[i].quantidade}" disabled>
+                            <input type="number" class="form-control text-right" id="quantidade${i}" name="quantidade${i}" placeholder="Quantidade" value="${response[i].quantidade}" disabled>
                         </div>
                     </div>
                     </div>

@@ -60,7 +60,7 @@ class ProdutoCompostoController extends Controller
      */
     public function edit(ProdutoComposto $produtoComposto)
     {
-        //
+        return "Teste";
     }
 
     static function getNomeProdutoComposto($id)
