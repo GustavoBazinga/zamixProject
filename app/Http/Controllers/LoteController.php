@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateLoteRequest;
 use App\Models\Produto;
 use App\Models\Lote;
 use App\http\Controllers\ProdutoController;
+use Illuminate\Http\Request;
+use App\Models\ProdutoComposto;
 
 class LoteController extends Controller
 {
@@ -26,7 +28,8 @@ class LoteController extends Controller
     public function create()
     {
         $produtos = Produto::all();
-        return view('pages.batch.create')->with('produtos', $produtos);
+        $produtosCompostos = ProdutoComposto::all();
+        return view('pages.batch.create')->with('produtos', $produtos)->with('produtosCompostos', $produtosCompostos);
     }
 
     /**

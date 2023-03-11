@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('produto_composto', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->float('precoCusto');
+            $table->float('precoVenda');
             $table->timestamps();
         });
     }

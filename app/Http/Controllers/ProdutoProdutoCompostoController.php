@@ -32,8 +32,8 @@ class ProdutoProdutoCompostoController extends Controller
     static public function store(Request $request, $id)
     {
         $cont = 0;
-        for($i = 3; $i < count($request->all()); $i += 2) {
-            $index = floor($i / 2);
+        for($i = 5; $i < count($request->all()); $i += 2) {
+            $index = ($i - 5)/2 + 1;
             $produto = ProdutoProdutoComposto::create([
                 'produto_composto_id' => $id,
                 'produto_id' => $request->all()["produto$index"],

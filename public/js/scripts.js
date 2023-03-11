@@ -34,13 +34,17 @@ function alteraTipo(value) {
     else{
         divFormGroup = document.createElement('div');
         divFormGroup.setAttribute('class', 'form-group');
-        btnAdd = document.createElement('button');
-        btnAdd.setAttribute('type', 'button');
-        btnAdd.setAttribute('class', 'btn btn-primary btn-sm');
-        btnAdd.setAttribute('id', 'btnAdd');
-        btnAdd.setAttribute('onclick', 'getProdutoList()');
-        btnAdd.innerHTML = 'Adicionar Produto';
-        divFormGroup.appendChild(btnAdd);
+        divFormGroup.innerHTML = `
+        <div class="form-group">
+            <label for="precoCusto">Preço de Custo</label>
+            <input type="number" class="form-control" id="precoCusto" name="precoCusto" placeholder="Preço de Custo" value="0" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="precoVenda">Preço de Venda</label>
+            <input type="number" class="form-control" id="precoVenda" name="precoVenda" placeholder="Preço de Venda" value="0" min="0" step="0.01">
+        </div>
+            <button type="button" class="btn btn-primary btn-sm" id="btnAdd" onclick="getProdutoList()">Adicionar Produto</button>
+        `
         divMountPage.appendChild(divFormGroup);
     }
 }

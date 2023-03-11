@@ -38,6 +38,8 @@ class ProdutoCompostoController extends Controller
     {
         $produtoComposto = ProdutoComposto::create([
             'nome' => $request->nome,
+            'precoCusto' => $request->precoCusto,
+            'precoVenda' => $request->precoVenda,
         ]);
         ProdutoProdutoCompostoController::store($request, $produtoComposto->id);
     }

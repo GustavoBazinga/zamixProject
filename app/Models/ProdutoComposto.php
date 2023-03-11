@@ -10,7 +10,7 @@ class ProdutoComposto extends Model
     use HasFactory;
 
     protected $table = 'produto_composto';
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome', 'precoCusto', 'precoVenda'];
 
     public function produtos()
     {
