@@ -98,6 +98,7 @@ class ProdutoProdutoCompostoController extends Controller
                         'produto_id' => $produtoId,
                         'quantidade' => $quant,
                     ]);
+                    continue;
                 }
                 $produto = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
                 for($j = 0; $j < count($produto); $j++) {
