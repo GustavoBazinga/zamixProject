@@ -50,9 +50,6 @@ function alteraTipo(value) {
     }
 }
 
-function editProdutoComposto(id){
-
-}
 // Função auxiliar que recebe um elemento e remove tudo que tem dentro dele
 function limpaElemento(element){
     let child = element.lastElementChild;
@@ -62,25 +59,54 @@ function limpaElemento(element){
     }
 }
 
-function getProdutoList(composto = false){
+async function getProdutosCompostos(){
     let divMountPage = document.querySelector('#mountPage');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             response = JSON.parse(this.responseText);
+            return response;
+        }
+    };
+    xhttp.open("GET", "http://localhost:8000/getProdutosCompostos", true);
+    xhttp.send();
+}
+
+async function getProdutoList(request = false){
+    let divMountPage = document.querySelector('#mountPage');
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            response = JSON.parse(this.responseText);
+            console.log(response);
             divFormGroup = document.createElement('div');
             divFormGroup.setAttribute('class', 'form-group');
             count = document.querySelectorAll('.toCount').length + 1;
             options = '<option value="0">Selecione um Produto</option>';
+            optGroupSimples = '<optgroup label="Produtos Simples">'
+            optGroupComposto = '<optgroup label="Produtos Compostos">'
             for (i = 0; i < response.length; i++) {
-                options += `<option value="${response[i].id}">${response[i].nome}</option>`
+                if (response[i].quantidade != undefined) {
+                    console.log("Simples");
+                    optGroupSimples += `<option value="${response[i].id}">${response[i].nome}</option>`
+                }else{
+                    console.log("Composto");
+                    optGroupComposto += `<option value="PC-${response[i].id}">${response[i].nome}</option>`
+                }
             }
+
+            optGroupSimples += `</optgroup>`
+            optGroupComposto += `</optgroup>`
+
             divFormGroup.innerHTML =`
                 <div class="row pl-4">
                     <div class="col-10">
                         <label for="produto">Produto #${count}</label>
                         <select class="form-control toCount" id="produto${count}" name="produto${count}" placeholder="Produto" value="0">
                             ${options}
+                            ${optGroupSimples}
+                            ${optGroupComposto}
+
                         </select>
                     </div>
                     <div class="col-2">
@@ -92,7 +118,7 @@ function getProdutoList(composto = false){
             divMountPage.appendChild(divFormGroup);
         }
     };
-    xhttp.open("GET", "http://localhost:8000/getProdutos", true);
+    xhttp.open("GET", "http://localhost:8000/getAllProdutos", true);
     xhttp.send();
 }
 

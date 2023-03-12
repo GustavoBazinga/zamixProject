@@ -7,7 +7,7 @@
         @slot('formInput')
             <div class="form-group">
                 <h3>Lista de Produtos</h3>
-                <button type="button" class="btn btn-primary btn-sm" id="btnAdd" onclick="getProdutoList()">Adicionar Produto</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnAdd" onclick="getProdutoList(true)">Adicionar Produto</button>
 
             </div>
             <div id="mountPage">
@@ -17,8 +17,4 @@
 
     @endcomponent
     <script src="{{ asset('js/scripts.js')}}"></script>
-{{--    <script>--}}
-{{--        const divProdutos = document.querySelector('#mountPage');--}}
-{{--        divProdutos.addEventListener('load', mountRequestPage());--}}
-{{--    </script>--}}
 @endsection

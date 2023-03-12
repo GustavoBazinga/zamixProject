@@ -112,6 +112,13 @@ class ProdutoCompostoController extends Controller
         return redirect()->route('worker.index');
     }
 
+    static function getAll()
+    {
+        $produtos = Produto::all();
+        $produtosCompostos = ProdutoComposto::all();
+        $produtos = $produtos->concat($produtosCompostos);
+        return $produtos;
+    }
     static function getNomeProdutoComposto($id)
     {
         $produto = ProdutoComposto::find($id);

@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('listagem_produtos', function (Blueprint $table) {
-//            $table->dropPrimary('id');
-//            $table->bigIncrements('id');
-            $table->unsignedBigInteger('produto_id');
+            $table->id();
+            $table->unsignedBigInteger('produto_id')->nullable();
             $table->foreign('produto_id')->references('id')->on('produtos');
-            $table->unsignedBigInteger('produto_composto_id');
+            $table->unsignedBigInteger('produto_composto_id')->nullable();
             $table->foreign('produto_composto_id')->references('id')->on('produto_composto');
             $table->unsignedBigInteger('requisicao_id');
             $table->foreign('requisicao_id')->references('id')->on('requisicaos');
@@ -25,7 +24,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->primary(['produto_id', 'produto_composto_id', 'requisicao_id']);
+//            $table->primary(['requisicao_id']);
         });
     }
 

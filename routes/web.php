@@ -17,7 +17,7 @@ Route::resource('/batch', LoteController::class);
 Route::resource('/product-composite', ProdutoCompostoController::class);
 Route::resource('/request', RequisicaoController::class);
 
-
+Route::get('/getAllProdutos', [ProdutoCompostoController::class, 'getAll'])->name('getAll');
 Route::get('/getProdutos', [ProdutoController::class, 'getProdutos'])->name('getProdutos');
 
 Route::get('/getSubProdutos/{id}', [ProdutoCompostoController::class, 'getSubProdutos'])->name('getSubProdutos');

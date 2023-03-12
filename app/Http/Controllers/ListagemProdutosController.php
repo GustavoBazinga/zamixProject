@@ -64,4 +64,12 @@ class ListagemProdutosController extends Controller
     {
         //
     }
+
+    public static function adicionarProduto($id, $produto, $quantidade){
+        if (str_contains($quantidade, 'PC-')) {
+            $quantidade = substr($quantidade, 3);
+            dd($quantidade);
+        }
+
+    }
 }
