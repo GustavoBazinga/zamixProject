@@ -70,14 +70,7 @@ function getProdutoList(composto = false){
             response = JSON.parse(this.responseText);
             divFormGroup = document.createElement('div');
             divFormGroup.setAttribute('class', 'form-group');
-            if (composto){
-                count = document.querySelectorAll('.toCount').length + 1;
-
-            }
-            else{
-                count = divMountPage.childElementCount;
-            }
-
+            count = document.querySelectorAll('.toCount').length + 1;
             options = '<option value="0">Selecione um Produto</option>';
             for (i = 0; i < response.length; i++) {
                 options += `<option value="${response[i].id}">${response[i].nome}</option>`
@@ -153,4 +146,3 @@ function mountProductCompsite(id, disabled = false){
     xhttp.open("GET", "http://localhost:8000/getSubProdutos/" + id, true);
     xhttp.send();
 }
-

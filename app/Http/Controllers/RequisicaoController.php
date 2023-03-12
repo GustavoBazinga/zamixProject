@@ -6,6 +6,7 @@ use App\Models\Requisicao;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequisicaoRequest;
 use App\Http\Requests\UpdateRequisicaoRequest;
+use App\Models\Produto;
 
 class RequisicaoController extends Controller
 {
@@ -15,7 +16,19 @@ class RequisicaoController extends Controller
     public function index()
     {
         $requests = Requisicao::all();
-//        dd($requests);
+        $requisicoes = [];
+        foreach ($requests as $request) {
+            if ($request->funcionario == null) {
+                $request->funcionario = "Não definido";
+            }
+            if ($request->status == null) {
+                $request->status = "Pendente";
+            }else if ($request->status == 0) {
+                $request->status = "Recusando";
+            }else if ($request->status == 1) {
+                $request->status = "Concluído";
+            }
+        }
         return view('pages.request.index')->with('requests', $requests);
     }
 
@@ -24,7 +37,8 @@ class RequisicaoController extends Controller
      */
     public function create()
     {
-        //
+        $produtos = Produto::all();
+        return view('pages.request.create')->with('produtos', $produtos);
     }
 
     /**
@@ -62,8 +76,10 @@ class RequisicaoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Requisicao $requisicao)
+    public function destroy($id)
     {
-        //
+        $requisicao = Requisicao::find($id);
+        $requisicao->delete();
+        return redirect()->route('request.index');
     }
 }
