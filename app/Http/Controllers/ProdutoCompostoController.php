@@ -87,6 +87,7 @@ class ProdutoCompostoController extends Controller
 
             }
         }
+
         $produtosLista = [];
         $cont = 0;
         foreach ($produtos as $produto) {

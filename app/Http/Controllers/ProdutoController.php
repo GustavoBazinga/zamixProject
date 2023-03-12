@@ -68,8 +68,14 @@ class ProdutoController extends Controller
 
     static function getIdByName($name)
     {
-        $produto = Produto::where('nome', $name)->first();
-        return $produto->id;
+        if(is_numeric($name)){
+            return "#" .$name;
+        }
+        else{
+            $produto = Produto::where('nome', $name)->first();
+            return (int)$produto->id;
+        }
+
     }
 
     static function getNomeProduto($id)

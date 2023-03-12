@@ -139,8 +139,6 @@ function mountProductCompsite(id, disabled = false){
                         </div>
                     </div>
                    `
-
-
                 if (disabled){
                   inputs = divFormGroup.querySelectorAll('input');
                     for (j = 0; j < inputs.length; j++){

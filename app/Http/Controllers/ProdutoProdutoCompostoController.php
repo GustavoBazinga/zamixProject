@@ -82,8 +82,23 @@ class ProdutoProdutoCompostoController extends Controller
             try{
                 $quant = $request["quantidade$i"];
                 $produtoId = $request["produto$i"];
-                var_dump($quant);
-                var_dump($produtoId);
+                if ($quant == 0) {
+                    $produto = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
+                    for($j = 0; $j < count($produto); $j++) {
+                        if($produto[$j]->produto_id == $produtoId) {
+                            $produto[$j]->delete();
+                        }
+                    }
+                    continue;
+                }
+                if(str_contains($produtoId, '#')) {
+                    $produtoId = explode('#', $produtoId)[1];
+                    ProdutoProdutoComposto::create([
+                        'produto_composto_id' => $id,
+                        'produto_id' => $produtoId,
+                        'quantidade' => $quant,
+                    ]);
+                }
                 $produto = ProdutoProdutoComposto::where('produto_composto_id', $id)->get();
                 for($j = 0; $j < count($produto); $j++) {
                     if($produto[$j]->produto_id == $produtoId) {
@@ -91,6 +106,7 @@ class ProdutoProdutoCompostoController extends Controller
                         $produto[$j]->save();
                     }
                 }
+
 
             }
             catch(\Exception $e) {
