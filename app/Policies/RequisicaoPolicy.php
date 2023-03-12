@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\ProdutoProdutoComposto;
+use App\Models\Requisicao;
 use App\Models\User;
 
-class ProdutoProdutoCompostoPolicy
+class RequisicaoPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ProdutoProdutoCompostoPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ProdutoProdutoComposto $produtoProdutoComposto): bool
+    public function view(User $user, Requisicao $requisicao): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ProdutoProdutoCompostoPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ProdutoProdutoComposto $produtoProdutoComposto): bool
+    public function update(User $user, Requisicao $requisicao): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class ProdutoProdutoCompostoPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ProdutoProdutoComposto $produtoProdutoComposto): bool
+    public function delete(User $user, Requisicao $requisicao): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class ProdutoProdutoCompostoPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ProdutoProdutoComposto $produtoProdutoComposto): bool
+    public function restore(User $user, Requisicao $requisicao): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ProdutoProdutoCompostoPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ProdutoProdutoComposto $produtoProdutoComposto): bool
+    public function forceDelete(User $user, Requisicao $requisicao): bool
     {
         //
     }
