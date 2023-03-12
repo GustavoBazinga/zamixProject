@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Requisicao extends Model
 {
     use HasFactory;
+
+    protected $table = 'requisicoes';
+    protected $fillable = ['id'];
+
+    public function listagemProdutos()
+    {
+        return $this->hasMany(ListagemProdutos::class);
+    }
 }

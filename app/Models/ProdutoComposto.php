@@ -21,4 +21,9 @@ class ProdutoComposto extends Model
     {
         return $this->hasMany(Lote::class);
     }
+
+    public function requisicoes()
+    {
+        return $this->hasMany(Requisicao::class);
+    }
 }

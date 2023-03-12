@@ -1,7 +1,7 @@
 
     <div id="sidebar">
         <header>
-            <a href="#">Zamix Project</a>
+            <a href="#">Project</a>
         </header>
         <ul class="nav">
             <li>
