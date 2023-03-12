@@ -58,9 +58,10 @@ class ProdutoCompostoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProdutoComposto $produtoComposto)
+    public function edit(ProdutoComposto $produtoComposto, $id)
     {
-        return "Teste";
+        $produto = ProdutoComposto::find($id);
+        return view('pages.product.productComposite.edit')->with('produtoComposto', $produto);
     }
 
     static function getNomeProdutoComposto($id)

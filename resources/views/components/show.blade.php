@@ -8,10 +8,9 @@
         <div class="card-body">
             {{ $inputs ?? null}}
             <button class="btn btn-secondary">Voltar</button>
-            <button onclick="{{ $editPath ?? null }}" class="btn btn-primary">
+            <a href="{{$editPath ?? null}}" class="btn btn-primary">
                 Editar
-            </button>
-
+            </a>
         </div>
     </div>
 </div>

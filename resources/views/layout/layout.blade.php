@@ -46,8 +46,8 @@
                 <!-- Somente a home page possui a logo -->
                 <div class="row">
                     <div class="col-md-12 text-center pt-2">
-                        <img src="" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
-{{--                        <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">--}}
+{{--                        <img src="" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">--}}
+                        <img src="{{ asset('images/logoZamix.png') }}" alt="Your image" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;">
                     </div>
                 </div>
             @endif
