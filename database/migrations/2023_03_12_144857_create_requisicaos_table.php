@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('requisicaos', function (Blueprint $table) {
             $table->id();
+            $table->boolean('status')->nullable()->default(null);
+            $table->foreignId('funcionario_id')->nullable()->constrained('funcionarios');
+
             $table->timestamps();
         });
     }

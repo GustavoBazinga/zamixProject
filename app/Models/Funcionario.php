@@ -12,11 +12,10 @@ class Funcionario extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['nome', 'cpf'];
 
-    public function listagemProdutos()
+    public function requisicoes()
     {
-        return $this->hasMany(ListagemProdutos::class);
+        return $this->hasMany(Requisicao::class);
     }
-
 
 
 }

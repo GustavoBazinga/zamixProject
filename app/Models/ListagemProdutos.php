@@ -10,7 +10,7 @@ class ListagemProdutos extends Model
     use HasFactory;
 
     protected $table = 'listagem_produtos';
-    protected $fillable = ['produto_id', 'produto_composto_id', 'requisicao_id', 'quantidade', 'status', 'funcionario_id'];
+    protected $fillable = ['produto_id', 'produto_composto_id', 'requisicao_id', 'quantidade'];
 
     public function produto()
     {
@@ -27,8 +27,4 @@ class ListagemProdutos extends Model
         return $this->belongsTo(Requisicao::class);
     }
 
-    public function funcionario()
-    {
-        return $this->belongsTo(Funcionario::class);
-    }
 }

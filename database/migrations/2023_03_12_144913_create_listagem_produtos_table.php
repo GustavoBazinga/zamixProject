@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('requisicao_id');
             $table->foreign('requisicao_id')->references('id')->on('requisicaos');
             $table->integer('quantidade');
-            $table->boolean('status')->nullable()->default(null);
-            $table->foreignId('funcionario_id')->nullable()->constrained('funcionarios');
+
+
             $table->timestamps();
 
             $table->primary(['produto_id', 'produto_composto_id', 'requisicao_id']);

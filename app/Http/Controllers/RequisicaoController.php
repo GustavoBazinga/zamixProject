@@ -14,7 +14,9 @@ class RequisicaoController extends Controller
      */
     public function index()
     {
-        //
+        $requests = Requisicao::all();
+//        dd($requests);
+        return view('pages.request.index')->with('requests', $requests);
     }
 
     /**
