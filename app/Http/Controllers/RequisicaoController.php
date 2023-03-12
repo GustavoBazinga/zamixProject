@@ -54,12 +54,16 @@ class RequisicaoController extends Controller
         Requisicao::create();
         $id = Requisicao::all()->last()->id;
         for($i = 1; $i < count($request->all()) -1; $i++){
-
-            if ($request->all()['quantidade'.$i] != 0){
+            try{
+                if ($request->all()['quantidade'.$i] != 0){
                     ListagemProdutosController::adicionarProduto($id, $request->all()['produto'.$i], $request->all()['quantidade'.$i]);
                 }
+            }
+            catch (\Exception $e){
 
             }
+        }
+
     }
 
 

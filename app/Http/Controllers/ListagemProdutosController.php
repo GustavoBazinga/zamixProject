@@ -66,9 +66,20 @@ class ListagemProdutosController extends Controller
     }
 
     public static function adicionarProduto($id, $produto, $quantidade){
-        if (str_contains($quantidade, 'PC-')) {
-            $quantidade = substr($quantidade, 3);
-            dd($quantidade);
+        if (str_contains($produto, 'PC-')) {
+            $produto = explode('-', $produto)[1];
+            ListagemProdutos::create([
+                'requisicao_id' => $id,
+                'produto_composto_id' => $produto,
+                'quantidade' => $quantidade,
+            ]);
+        }
+        else{
+            ListagemProdutos::create([
+                'requisicao_id' => $id,
+                'produto_id' => $produto,
+                'quantidade' => $quantidade,
+            ]);
         }
 
     }
