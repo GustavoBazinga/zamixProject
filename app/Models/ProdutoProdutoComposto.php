@@ -12,6 +12,7 @@ class ProdutoProdutoComposto extends Model
     protected $table = 'produto_produto_compostos';
     protected $fillable = ['produto_id', 'produto_composto_id', 'quantidade'];
 
+
     public function produto()
     {
         return $this->belongsTo(Produto::class);

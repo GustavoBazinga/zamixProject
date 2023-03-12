@@ -64,6 +64,53 @@ class ProdutoCompostoController extends Controller
         return view('pages.product.productComposite.edit')->with('produtoComposto', $produto);
     }
 
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateProdutoCompostoRequest $request, ProdutoComposto $produtoComposto, $id)
+    {
+        $produto = ProdutoComposto::find($id);
+        $produto->update([
+            'nome' => $request->nome,
+            'precoCusto' => $request->precoCusto,
+            'precoVenda' => $request->precoVenda,
+        ]);
+        $produtos = [];
+        for ($i = 5; $i < count($request->all()); $i++) {
+            $index = ($i - 5)/2 + 1;
+            try{
+                $produtos[$index] = ProdutoController::getIdByName($request->all()["produto$index"]);
+            }
+            catch (\Exception $e){
+
+            }
+        }
+        $produtosLista = [];
+        $cont = 0;
+        foreach ($produtos as $produto) {
+            $cont++;
+            $produtosLista["produto$cont"] = $produto;
+            $produtosLista["quantidade$cont"] = $request->all()["quantidade$cont"];
+        }
+        ProdutoProdutoCompostoController::update($produtosLista, $produtoComposto, $id);
+        return redirect()->route('product.index');
+
+    }
+
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(ProdutoComposto $produtoComposto)
+    {
+        $produtoComposto = ProdutoComposto::find($produtoComposto->id);
+        $produtoComposto->delete();
+        return redirect()->route('worker.index');
+    }
+
     static function getNomeProdutoComposto($id)
     {
         $produto = ProdutoComposto::find($id);
@@ -77,23 +124,5 @@ class ProdutoCompostoController extends Controller
             $dados[$i]->nome = ProdutoController::getNomeProduto($dados[$i]->produto_id);
         }
         return $dados;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProdutoCompostoRequest $request, ProdutoComposto $produtoComposto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProdutoComposto $produtoComposto)
-    {
-        $produtoComposto = ProdutoComposto::find($produtoComposto->id);
-        $produtoComposto->delete();
-        return redirect()->route('worker.index');
     }
 }

@@ -66,6 +66,12 @@ class ProdutoController extends Controller
         $produto->update($request->all());
     }
 
+    static function getIdByName($name)
+    {
+        $produto = Produto::where('nome', $name)->first();
+        return $produto->id;
+    }
+
     static function getNomeProduto($id)
     {
         $produto = Produto::find($id);
