@@ -66,6 +66,16 @@ class ProdutoController extends Controller
         $produto->update($request->all());
     }
 
+    static function getPrecoProduto($id)
+    {
+        $produto = Produto::find($id);
+        return [
+            'precoCusto' => $produto->precoCusto,
+            'precoVenda' => $produto->precoVenda,
+        ];
+
+    }
+
     static function getIdByName($name)
     {
         if(is_numeric($name)){

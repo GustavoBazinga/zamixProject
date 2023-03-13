@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('lotes', function (Blueprint $table) {
             $table->id();
             $table->integer('quantidadeRecebida');
-            $table->float('precoLote');
-            $table->foreignId('produto_id')->nullable()->constrained('produtos');
-            $table->foreignId('produto_composto_id')->nullable()->constrained('produto_composto');
+            $table->float('precoCusto');
+            $table->float('precoVenda');
+            $table->foreignId('produto_id')->nullable()->constrained('produtos')->onDelete('cascade');
+            $table->foreignId('produto_composto_id')->nullable()->constrained('produto_composto')->onDelete('cascade');
             $table->timestamps();
 
         });

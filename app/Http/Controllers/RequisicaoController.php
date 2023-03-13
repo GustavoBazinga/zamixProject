@@ -27,9 +27,9 @@ class RequisicaoController extends Controller
             }
             if ($request->status == null) {
                 $request->status = "Pendente";
-            }else if ($request->status == 0) {
+            } else if ($request->status == 0) {
                 $request->status = "Recusando";
-            }else if ($request->status == 1) {
+            } else if ($request->status == 1) {
                 $request->status = "Concluído";
             }
         }
@@ -53,27 +53,25 @@ class RequisicaoController extends Controller
     {
         Requisicao::create();
         $id = Requisicao::all()->last()->id;
-        for($i = 1; $i < count($request->all()) -1; $i++){
-            try{
-                if ($request->all()['quantidade'.$i] != 0){
-                    ListagemProdutosController::adicionarProduto($id, $request->all()['produto'.$i], $request->all()['quantidade'.$i]);
+        for ($i = 1; $i < count($request->all()) - 1; $i++) {
+            try {
+                if ($request->all()['quantidade' . $i] != 0) {
+                    ListagemProdutosController::adicionarProduto($id, $request->all()['produto' . $i], $request->all()['quantidade' . $i]);
                 }
-            }
-            catch (\Exception $e){
+            } catch (\Exception $e) {
 
             }
         }
-
     }
-
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Requisicao $requisicao)
+    public function show($id)
     {
-        //
+        $request = Requisicao::find($id);
+        return view('pages.request.show')->with('request', $request);
     }
 
     /**
@@ -89,7 +87,7 @@ class RequisicaoController extends Controller
      */
     public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao)
     {
-        //
+
     }
 
     /**
@@ -100,5 +98,37 @@ class RequisicaoController extends Controller
         $requisicao = Requisicao::find($id);
         $requisicao->delete();
         return redirect()->route('request.index');
+    }
+
+    static public function getProdutosRequest($id)
+    {
+        $produtos = ListagemProdutos::where('requisicao_id', $id)->get();
+        foreach ($produtos as $produto) {
+            $produto->produto = Produto::find($produto->produto_id);
+            $produto->produtoComposto = ProdutoComposto::find($produto->produto_composto_id);
+        }
+        return $produtos;
+    }
+
+    static public function executeRequest($id, $status)
+    {
+        $produtos = self::getProdutosRequest($id);
+        $requisicao = Requisicao::find($id);
+        if ($status) {
+            foreach ($produtos as $produto) {
+                if ($produto->produto != null) {
+                    $produto->produto->quantidade -= $produto->quantidade;
+                    $produto->produto->save();
+                } else {
+                    $produto->produtoComposto->quantidade -= $produto->quantidade;
+                    $produto->produtoComposto->save();
+                }
+            }
+        }
+        else{
+            $requisicao->status = false;
+//            $requisicao->update($requisicao->toArray());
+        }
+       return $requisicao;
     }
 }

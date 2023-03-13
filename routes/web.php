@@ -19,5 +19,7 @@ Route::resource('/request', RequisicaoController::class);
 
 Route::get('/getAllProdutos', [ProdutoCompostoController::class, 'getAll'])->name('getAll');
 Route::get('/getProdutos', [ProdutoController::class, 'getProdutos'])->name('getProdutos');
-
 Route::get('/getSubProdutos/{id}', [ProdutoCompostoController::class, 'getSubProdutos'])->name('getSubProdutos');
+Route::get('/getProdutosRequest/{id}', [RequisicaoController::class, 'getProdutosRequest'])->name('getProdutosRequest');
+Route::get('/executeRequest/{id}/{status}', [RequisicaoController::class, 'executeRequest'])->name('executeRequest');
+Route::get('/getPrecoProduto/{id}', [ProdutoController::class, 'getPrecoProduto'])->name('getPrecoProduto');

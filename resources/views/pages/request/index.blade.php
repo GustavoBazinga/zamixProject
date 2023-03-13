@@ -19,7 +19,7 @@
                     <td>{{ $request->updated_at }}</td>
                     <td>{{ $request->funcionario }}</td>
                     <td>
-                        <a href="{{ url('request/'. $request->id) }}" title="Ver Requisição"><button class="btn btn-info btn-sm">Ver</button></a>
+                        <a href="{{ url('request/' . $request->id) }}" title="Ver Requisição"><button class="btn btn-info btn-sm">Ver</button></a>
                         <a href="{{ url('/request/' . $request->id . '/edit') }}" title="Editar Requisição"><button class="btn btn-primary btn-sm">Editar</button></a>
                         <form method="POST" action="{{ url('/request' . '/' . $request->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}

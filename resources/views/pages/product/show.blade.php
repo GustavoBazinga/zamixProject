@@ -1,7 +1,6 @@
 @extends('layout.layout')
 
 @section('content')
-    @slot('onloadPath', 'mountProductCompsite({{ $produto->id }})')
     @component('components.show')
         @slot('title', 'Visualizar Produto')
         @slot('editPath', route('product-composite.edit', $produto))

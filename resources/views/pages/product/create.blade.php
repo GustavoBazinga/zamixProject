@@ -5,7 +5,7 @@
     @component('components.create')
         <!-- Dados especificos do header -->
         @slot('title', 'Produto')
-        @slot('url', route('product.store'))
+        @slot('url', route('product.store', ))
         @slot('pathIndex', route('product.index'))
         <!-- Dados especificos dos inputs -->
         @slot('formInput')
@@ -41,8 +41,9 @@
                     <input type="number" min="0" step="0.01" class="form-control" name="precoVenda" id="precoVenda" placeholder="Preço de venda do produto">
                 </div>
             </div>
-            <script src="{{ asset('js/scripts.js')}}"></script>
+
         @endslot
     @endcomponent
+    <script src="{{ asset('js/scripts.js')}}"></script>
 @endsection
 

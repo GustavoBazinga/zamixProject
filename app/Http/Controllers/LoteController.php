@@ -51,13 +51,22 @@ class LoteController extends Controller
     public function store(StoreLoteRequest $request)
     {
         if (str_contains($request->produto_id, 'PC-')) {
-
             $request->produto_id = str_replace('PC-', '', $request->produto_id);
+            $produtos = ProdutoProdutoComposto::find($request->produto_id);
+            $precoCusto = 0;
+            $precoVenda = 0;
+//            dd($produtos->all());
+            foreach ($produtos->all() as $produto) {
+                $produto = Produto::find($produto->produto_id);
+                $precoCusto += $produto->precoCusto * $request->quantidadeRecebida * $produto->quantidade;
+                $precoVenda += $produto->precoVenda * $request->quantidadeRecebida * $produto->quantidade;
+            }
             Lote::create([
                 'produto_id' => null,
                 'produto_composto_id' => $request->produto_id,
                 'quantidadeRecebida' => $request->quantidadeRecebida,
-                'precoLote' => $request->precoLote
+                'precoCusto' => $precoCusto,
+                'precoVenda' => $precoVenda,
             ]);
             $produtos = ProdutoProdutoCompostoController::getAllProdutos($request, $request->produto_id);
 
@@ -66,11 +75,15 @@ class LoteController extends Controller
                 ProdutoController::updateQuantidade($request, $produto[0]->id, $produtos[$i][1] * $request->quantidadeRecebida);
             }
         }else{
+            $produto = Produto::find($request->produto_id);
+            $precoCusto = $produto->precoCusto * $request->quantidadeRecebida;
+            $precoVenda = $produto->precoVenda * $request->quantidadeRecebida;
             Lote::create([
                 'produto_id' => $request->produto_id,
                 'produto_composto_id' => null,
                 'quantidadeRecebida' => $request->quantidadeRecebida,
-                'precoLote' => $request->precoLote
+                'precoCusto' => $precoCusto,
+                'precoVenda' => $precoVenda,
             ]);
             ProdutoController::updateQuantidade($request, $request->produto_id, $request->quantidadeRecebida);
         }
