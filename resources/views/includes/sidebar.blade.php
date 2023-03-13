@@ -1,35 +1,58 @@
+<div class="area"></div><nav class="main-menu">
+    <ul>
+        <li>
+            <a href="/">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                           Início
+                        </span>
+            </a>
 
-    <div id="sidebar">
-        <header>
-            <a href="#">Project</a>
-        </header>
-        <ul class="nav">
-            <li>
-                <a href="">
-                    <i class="zmdi zmdi-view-dashboard"></i> Início
-                </a>
-            </li>
+        </li>
+        <li class="has-subnav">
+            <a href="/product">
+                <i class="fa fa-solid fa-box fa-2x text-center"></i>
+                <span class="nav-text">
+                            Produtos
+                        </span>
+            </a>
 
-            <li>
-                <a href="#">
-                    <i class="zmdi zmdi-link"></i> Produtos
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="zmdi zmdi-widgets"></i> Funcionários
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="zmdi zmdi-calendar"></i> Estoque
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="zmdi zmdi-info-outline"></i> Requisições
-                </a>
-            </li>
+        </li>
+        <li class="has-subnav">
+            <a href="/worker">
+                <i class="fa fa-solid fa-person fa-2x"></i>
+                <span class="nav-text">
+                            Funcionários
+                        </span>
+            </a>
 
-        </ul>
-    </div>
+        </li>
+        <li class="has-subnav">
+            <a href="/batch">
+                <i class="fa fa-light fa-boxes-stacked fa-2x"></i>
+                <span class="nav-text">
+                            Lotes
+                        </span>
+            </a>
+
+        </li>
+        <li>
+            <a href="/request">
+                <i class="fa fa-solid fa-list fa-2x"></i>
+                <span class="nav-text">
+                            Requisições
+                        </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="fa fa-solid fa-clipboard-check fa-2x"></i>
+                <span class="nav-text">
+                           Relatórios
+                        </span>
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
