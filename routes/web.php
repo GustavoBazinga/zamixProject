@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/request/report', [RequisicaoController::class, 'indexReport'])->name('indexReport');
+
 Route::resource('/product', ProdutoController::class);
 Route::resource('/worker', FuncionarioController::class);
 Route::resource('/batch', LoteController::class);
@@ -23,3 +25,5 @@ Route::get('/getSubProdutos/{id}', [ProdutoCompostoController::class, 'getSubPro
 Route::get('/getProdutosRequest/{id}', [RequisicaoController::class, 'getProdutosRequest'])->name('getProdutosRequest');
 Route::get('/executeRequest/{id}/{status}', [RequisicaoController::class, 'executeRequest'])->name('executeRequest');
 Route::get('/getPrecoProduto/{id}', [ProdutoController::class, 'getPrecoProduto'])->name('getPrecoProduto');
+
+Route::get('/getRelatorio/{type}', [RequisicaoController::class, 'getRelatorio'])->name('getRelatorio');

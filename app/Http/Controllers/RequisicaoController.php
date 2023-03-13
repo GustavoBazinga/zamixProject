@@ -11,6 +11,7 @@ use App\Models\Produto;
 use function Webmozart\Assert\Tests\StaticAnalysis\length;
 use App\Models\ProdutoComposto;
 use App\http\Controllers\ListagemProdutosController;
+use Illuminate\Support\Facades\DB;
 
 class RequisicaoController extends Controller
 {
@@ -33,6 +34,7 @@ class RequisicaoController extends Controller
                 $request->status = "Concluído";
             }
         }
+//        dd($request);
         return view('pages.request.index')->with('requests', $requests);
     }
 
@@ -71,7 +73,9 @@ class RequisicaoController extends Controller
     public function show($id)
     {
         $request = Requisicao::find($id);
-        return view('pages.request.show')->with('request', $request);
+        $total = DB::select('SELECT SUM(p.precoVenda * lp.quantidade) AS valor_total_venda FROM listagem_produtos lp JOIN produtos p ON lp.produto_id = p.id LEFT JOIN produto_composto pc ON lp.produto_composto_id = pc.id WHERE lp.requisicao_id = ?', [$id]);
+        $funcionarios = DB::select('SELECT * FROM funcionarios');
+        return view('pages.request.show')->with('request', $request)->with('total', $total[0]->valor_total_venda)->with('funcionarios', $funcionarios);
     }
 
     /**
@@ -85,9 +89,13 @@ class RequisicaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao)
+    public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao, $status)
     {
-
+        $requisicao->status = $status;
+        $requisicao->funcionario = $request->funcionario;
+        $requisicao->save();
+        $requisicao = Requisicao::find($requisicao->id);
+        return redirect()->route('request.show', $requisicao->id);
     }
 
     /**
@@ -115,20 +123,23 @@ class RequisicaoController extends Controller
         $produtos = self::getProdutosRequest($id);
         $requisicao = Requisicao::find($id);
         if ($status) {
-            foreach ($produtos as $produto) {
-                if ($produto->produto != null) {
-                    $produto->produto->quantidade -= $produto->quantidade;
-                    $produto->produto->save();
-                } else {
-                    $produto->produtoComposto->quantidade -= $produto->quantidade;
-                    $produto->produtoComposto->save();
-                }
-            }
+            error_log("entrou");
+        } else {
+            $response = self::update($requisicao, $status);
         }
-        else{
-            $requisicao->status = false;
-//            $requisicao->update($requisicao->toArray());
+        return $response;
+    }
+
+    static function indexReport()
+    {
+        return view('pages.request.report.index');
+    }
+
+    static public function getRelatorio($type)
+    {
+        if ($type == '3') {
+            $results = DB::select("SELECT produtos.nome AS nome_produto, listagem_produtos.quantidade, listagem_produtos.quantidade * produtos.precoCusto AS precoCusto_total, listagem_produtos.quantidade * produtos.precoVenda AS precoVenda_total, requisicaos.id AS requisicao_id FROM listagem_produtos INNER JOIN requisicaos ON listagem_produtos.requisicao_id = requisicaos.id AND requisicaos.status = TRUE INNER JOIN produtos ON listagem_produtos.produto_id = produtos.id WHERE listagem_produtos.produto_composto_id IS NULL UNION ALL SELECT produtos.nome AS nome_produto, listagem_produtos.quantidade * produto_produto_compostos.quantidade AS quantidade, listagem_produtos.quantidade * produto_produto_compostos.quantidade * produtos.precoCusto AS precoCusto_total, listagem_produtos.quantidade * produto_produto_compostos.quantidade * produtos.precoVenda AS precoVenda_total, requisicaos.id AS requisicao_id FROM listagem_produtos INNER JOIN requisicaos ON listagem_produtos.requisicao_id = requisicaos.id AND requisicaos.status = TRUE INNER JOIN produto_composto ON listagem_produtos.produto_composto_id = produto_composto.id INNER JOIN produto_produto_compostos ON produto_composto.id = produto_produto_compostos.produto_composto_id INNER JOIN produtos ON produto_produto_compostos.produto_id = produtos.id ");
         }
-       return $requisicao;
+        return $results;
     }
 }

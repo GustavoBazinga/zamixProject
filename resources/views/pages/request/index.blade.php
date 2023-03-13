@@ -17,14 +17,14 @@
                     <td>{{ $request->status }}</td>
                     <td>{{ $request->created_at }}</td>
                     <td>{{ $request->updated_at }}</td>
-                    <td>{{ $request->funcionario }}</td>
+                    <td>{{ $request->funcionario->nome }}</td>
                     <td>
                         <a href="{{ url('request/' . $request->id) }}" title="Ver Requisição"><button class="btn btn-info btn-sm">Ver</button></a>
                         <a href="{{ url('/request/' . $request->id . '/edit') }}" title="Editar Requisição"><button class="btn btn-primary btn-sm">Editar</button></a>
                         <form method="POST" action="{{ url('/request' . '/' . $request->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" title="Apagar Requisição" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i>Apagar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Apagar Requisição" onclick="return confirm(&quot;Confirma exclusão?&quot;)"></i>Apagar</button>
                         </form>
                     </td>
                 </tr>

@@ -256,15 +256,77 @@ function mountRequestList(id){
 }
 
 function tratarRequisicao(id, status){
-
+    funcionario = document.querySelector('#funcionario').value;
+    if (funcionario === 0){
+        alert('Selecione um funcionário');
+        return;
+    }
+    if(status === 1){
+        console.log('Aprovado');
+    }
+    else{
+        console.log('Reprovado');
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             response = JSON.parse(this.responseText);
             console.log(response);
-            // window.location.href = 'http://localhost:8000/requisicoes';
+            // window.location.href = 'http://localhost:8000/request';
         }
     };
     xhttp.open("GET", "http://localhost:8000/executeRequest/" + id + '/' + status, true);
     xhttp.send();
+}
+
+function alteraRelatorio(value){
+    divResult = document.querySelector('#result');
+    table = document.createElement('table');
+    table.setAttribute('class', 'table table-striped');
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Typical action to be performed when the document is ready:
+            response = JSON.parse(this.responseText);
+            if (value === 1){
+
+            }
+            else if (value === 2){
+
+            }
+            else{
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço de Custo</th>
+                            <th>Preço de Venda</th>
+                            <th>Lucro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    `
+                for (i = 0; i < response.length; i++){
+                    table.innerHTML += `
+                        <tr>
+                            <td>${response[i].nome_produto}</td>
+                            <td>${response[i].quantidade}</td>
+                            <td>${response[i].precoCusto_total}</td>
+                            <td>${response[i].precoVenda_total}</td>
+                            <td>${response[i].precoVenda_total - response[i].precoCusto_total}</td>
+                        </tr>
+                    `
+                }
+                table.innerHTML += `
+                    </tbody>
+                `
+            }
+            divResult.appendChild(table);
+        }
+    };
+    xhttp.open("GET", "http://localhost:8000/getRelatorio/" + value, true);
+    xhttp.send();
+
 }

@@ -25,7 +25,7 @@
                         <form method="POST" action="{{ url('/batch' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Batch" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i>Apagar</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Batch" onclick="return confirm(&quot;Confirma exclusão??&quot;)">Apagar</button>
                         </form>
                     </td>
                 </tr>

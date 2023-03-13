@@ -45,7 +45,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/request/report">
                 <i class="fa fa-solid fa-clipboard-check fa-2x"></i>
                 <span class="nav-text">
                            Relatórios
