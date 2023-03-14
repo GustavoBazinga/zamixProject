@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="quant">Quantidade</label> <span class="aviso">Coloque 0 para exluir o lote</span>
-                <input type="number" name="quant" id="quant" value="{{ $lote->quantidadeRecebida }}" class="form-control" placeholder="Nome">
+                <input type="number" name="quant" min=0 id="quant" value="{{ $lote->quantidadeRecebida }}" class="form-control" placeholder="Nome">
             </div>
 
         @endslot
