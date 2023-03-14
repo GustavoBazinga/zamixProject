@@ -26,4 +26,4 @@ Route::get('/getProdutosRequest/{id}', [RequisicaoController::class, 'getProduto
 Route::get('/executeRequest/{id}/{status}', [RequisicaoController::class, 'executeRequest'])->name('executeRequest');
 Route::get('/getPrecoProduto/{id}', [ProdutoController::class, 'getPrecoProduto'])->name('getPrecoProduto');
 
-Route::get('/getRelatorio/{type}', [RequisicaoController::class, 'getRelatorio'])->name('getRelatorio');
+Route::get('/getRelatorio/{type}/{dataInicial}/{dataFinal}', [RequisicaoController::class, 'getRelatorio'])->name('getRelatorio');

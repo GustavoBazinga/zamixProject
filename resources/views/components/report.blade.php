@@ -23,6 +23,14 @@
                 Relatório de Saída
             </label>
         </div>
+        <div class="form-group">
+            <label for="dataInicial">Data Inicial</label>
+            <input type="date" class="form-control" id="dataInicial" name="dataInicial" onchange="alteraRelatorio()">
+        </div>
+        <div class="form-group">
+            <label for="dataFinal">Data Final</label>
+            <input type="date" class="form-control" id="dataFinal" name="dataFinal" onchange="alteraRelatorio()">
+        </div>
         <div id="result" class="table-responsive">
             {{ $bodyItems ?? null}}
         </div>

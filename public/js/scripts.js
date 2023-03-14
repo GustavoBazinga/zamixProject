@@ -280,20 +280,54 @@ function tratarRequisicao(id, status){
 }
 
 function alteraRelatorio(value){
+
     divResult = document.querySelector('#result');
     table = document.createElement('table');
     table.setAttribute('class', 'table table-striped');
+    dataInicial = document.querySelector('#dataInicial').value;
+    dataFinal = document.querySelector('#dataFinal').value;
+    console.log(dataInicial);
+    console.log(dataFinal);
+    limpaElemento(divResult);
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             // Typical action to be performed when the document is ready:
+            console.log(this.responseText);
             response = JSON.parse(this.responseText);
-            if (value === 1){
+            console.log(response);
+            if (value === "1"){
 
             }
-            else if (value === 2){
-
+            else if (value === "2"){
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Requição</th>
+                            <th>Status</th>
+                            <th>Funcionário</th>
+                            <th>Data Criação</th>
+                            <th>Data Atualização</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `
+                for (i = 0; i < response.length; i++){
+                    console.log(response[i]);
+                    table.innerHTML += `
+                        <tr>
+                            <td>${response[i].requisicao_id}</td>
+                            <td>${response[i].status}</td>
+                            <td>${response[i].nome_funcionario}</td>
+                            <td>${response[i].data_criacao}</td>
+                            <td>${response[i].data_atualizacao}</td>
+                        </tr>
+                    `
+                }
+                table.innerHTML += `
+                    </tbody>
+                `
             }
             else{
                 table.innerHTML = `
@@ -326,7 +360,7 @@ function alteraRelatorio(value){
             divResult.appendChild(table);
         }
     };
-    xhttp.open("GET", "http://localhost:8000/getRelatorio/" + value, true);
+    xhttp.open("GET", "http://localhost:8000/getRelatorio/" + value + "/" + dataInicial + "/" + dataFinal , true);
     xhttp.send();
 
 }
