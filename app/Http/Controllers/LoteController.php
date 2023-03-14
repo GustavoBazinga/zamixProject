@@ -132,13 +132,15 @@ class LoteController extends Controller
             $lote->quantidadeRecebida = $quantidade;
             $lote->save();
         }
-        if ($quantidadeAtual > $quantidade){
-            $quantidade = $quantidadeAtual - $quantidade;
-            ProdutoController::updateQuantidade($request, $lote->produto_id, -$quantidade);
-        }else{
-            $quantidade = $quantidade - $quantidadeAtual;
+        if ($lote->produto_id != null) {
+            if ($quantidadeAtual > $quantidade) {
+                $quantidade = $quantidadeAtual - $quantidade;
+                ProdutoController::updateQuantidade($request, $lote->produto_id, -$quantidade);
+            } else {
+                $quantidade = $quantidade - $quantidadeAtual;
 
-            ProdutoController::updateQuantidade($request, $lote->produto_id, $quantidade);
+                ProdutoController::updateQuantidade($request, $lote->produto_id, $quantidade);
+            }
         }
         return redirect()->route('batch.index');
 
