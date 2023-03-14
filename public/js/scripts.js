@@ -298,6 +298,32 @@ function alteraRelatorio(value){
             response = JSON.parse(this.responseText);
             console.log(response);
             if (value === "1"){
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade Entrada</th>
+                            <th>Valor Custo</th>
+                            <th>Valor Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `
+                for (i = 0; i < response.length; i++){
+                    console.log(response[i]);
+                    table.innerHTML += `
+                        <tr>
+                            <td>${response[i].nome_produto}</td>
+                            <td>${response[i].quantidade_entrada}</td>
+                            <td>${response[i].precoCusto_total}</td>
+                            <td>${response[i].precoVenda_total}</td>
+                        </tr>
+                    `
+                }
+                table.innerHTML += `
+                    </tbody>
+                `
+                divResult.appendChild(table);
 
             }
             else if (value === "2"){
