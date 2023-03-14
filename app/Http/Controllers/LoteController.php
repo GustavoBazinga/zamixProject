@@ -103,24 +103,52 @@ class LoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lote $lote)
+    public function edit(Lote $lote, $id)
     {
-        //
+        $loteAtual = Lote::find($id);
+        try {
+            $produto = Produto::find($loteAtual->produto_id);
+        }
+        catch (\Exception $e) {
+            $produto = ProdutoComposto::find($loteAtual->produto_composto_id);
+            $produto->nome = 'PC-' . $produto->nome;
+        }
+        return view('pages.batch.edit')->with('lote', $loteAtual)->with('produto', $produto->nome);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLoteRequest $request, Lote $lote)
+    public function update(UpdateLoteRequest $request, Lote $lote, $id)
     {
-        //
+        $quantidade = $request->all()['quant'];
+        $quantidadeAtual = Lote::find($id)->quantidadeRecebida;
+
+        if ($quantidade == "0"){
+            $lote = Lote::find($id);
+            $lote->delete();
+        }else{
+            $lote = Lote::find($id);
+            $lote->quantidadeRecebida = $quantidade;
+            $lote->save();
+        }
+//        if ($quantidadeAtual > $quantidade){
+//            $quantidade = $quantidadeAtual - $quantidade;
+//            ProdutoController::updateQuantidade($request, $lote->produto_id, -$quantidade);
+//        }else{
+//            $quantidade = $quantidade - $quantidadeAtual;
+//            ProdutoController::updateQuantidade($request, $lote->produto_id, $quantidade);
+//        }
+        return redirect()->route('batch.index');
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lote $lote)
+    public function destroy(Lote $lote, $id)
     {
-        //
+        dd($id);
     }
 }
