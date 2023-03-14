@@ -298,6 +298,7 @@ function alteraRelatorio(value){
             response = JSON.parse(this.responseText);
             console.log(response);
             if (value === "1"){
+
                 table.innerHTML = `
                     <thead>
                         <tr>
@@ -315,15 +316,24 @@ function alteraRelatorio(value){
                         <tr>
                             <td>${response[i].nome_produto}</td>
                             <td>${response[i].quantidade_entrada}</td>
-                            <td>${response[i].precoCusto_total}</td>
-                            <td>${response[i].precoVenda_total}</td>
+                            <td  class="toCountCusto">${response[i].precoCusto_total}</td>
+                            <td  class="toCountVenda">${response[i].precoVenda_total}</td>
                         </tr>
                     `
                 }
                 table.innerHTML += `
                     </tbody>
                 `
+
+
                 divResult.appendChild(table);
+                h2 = document.createElement('h2');
+                totais = soma();
+                h2.innerHTML = 'Total Custo de Entrada de Produtos: R$ ';
+                divResult.appendChild(h2);
+                h2 = document.createElement('h2');
+                h2.innerHTML = 'Total Venda de Produtos: R$ ' + totais[1];
+                divResult.appendChild(h2);
 
             }
             else if (value === "2"){
@@ -373,8 +383,8 @@ function alteraRelatorio(value){
                         <tr>
                             <td>${response[i].nome_produto}</td>
                             <td>${response[i].quantidade}</td>
-                            <td>${response[i].precoCusto_total}</td>
-                            <td>${response[i].precoVenda_total}</td>
+                            <td  class="toCountCusto">${response[i].precoCusto_total}</td>
+                            <td  class="toCountVenda">${response[i].precoVenda_total}</td>
                             <td>${response[i].precoVenda_total - response[i].precoCusto_total}</td>
                         </tr>
                     `
@@ -383,10 +393,33 @@ function alteraRelatorio(value){
                     </tbody>
                 `
             }
+
             divResult.appendChild(table);
+            h2 = document.createElement('h2');
+            totais = soma();
+            h2.innerHTML = 'Total Custo de Entrada de Produtos: R$ ' + totais[0]
+            divResult.appendChild(h2);
+            h2 = document.createElement('h2');
+            h2.innerHTML = 'Total Venda de Produtos: R$ ' + totais[1];
+            divResult.appendChild(h2);
         }
     };
     xhttp.open("GET", "http://localhost:8000/getRelatorio/" + value + "/" + dataInicial + "/" + dataFinal , true);
     xhttp.send();
 
+}
+
+function soma(){
+    toCountCusto = document.querySelectorAll('.toCountCusto');
+    toCountVenda = document.querySelectorAll('.toCountVenda');
+    total = 0;
+    totalCusto = 0;
+    totalVenda = 0;
+    for (i = 0; i < toCountCusto.length; i++){
+        totalCusto += parseFloat(toCountCusto[i].innerHTML);
+    }
+    for (i = 0; i < toCountVenda.length; i++){
+        totalVenda += parseFloat(toCountVenda[i].innerHTML);
+    }
+    return [totalCusto, totalVenda];
 }
