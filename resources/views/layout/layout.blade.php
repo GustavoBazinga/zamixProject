@@ -34,6 +34,11 @@
             align-items: center;
             justify-content: center;
         }
+        .sizeCardImage {
+            width: 70%;
+            height: 70%;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
