@@ -17,7 +17,7 @@
                     <td>{{ $request->status }}</td>
                     <td>{{ $request->created_at }}</td>
                     <td>{{ $request->updated_at }}</td>
-                    <td>{{ $request->funcionario->nome }}</td>
+                    <td>{{ $request->funcionario }}</td>
                     <td>
                         <a href="{{ url('request/' . $request->id) }}" title="Ver Requisição"><button class="btn btn-info btn-sm">Ver</button></a>
                         <a href="{{ url('/request/' . $request->id . '/edit') }}" title="Editar Requisição"><button class="btn btn-primary btn-sm">Editar</button></a>

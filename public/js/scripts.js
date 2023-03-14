@@ -261,18 +261,19 @@ function tratarRequisicao(id, status){
         alert('Selecione um funcionário');
         return;
     }
-    if(status === 1){
-        console.log('Aprovado');
-    }
-    else{
-        console.log('Reprovado');
-    }
+    console.log(id);
+    alert("Esse não funcionou!")
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            response = JSON.parse(this.responseText);
-            console.log(response);
-            // window.location.href = 'http://localhost:8000/request';
+            if (response.status === 'success'){
+                console.log(response.message);
+                window.location.href = 'http://localhost:8000/requisicoes';
+            }
+            else{
+                console.log(response.message);
+            }
         }
     };
     xhttp.open("GET", "http://localhost:8000/executeRequest/" + id + '/' + status, true);

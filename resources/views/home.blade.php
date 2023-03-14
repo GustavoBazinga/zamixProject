@@ -50,7 +50,7 @@
 
             </div>
             <div class="col-2">
-                <a type="button" href="" class="btn btn-primary">Relatórios</a>
+                <a type="button" href="/request/report" class="btn btn-primary">Relatórios</a>
             </div>
             <div class="col-4">
 

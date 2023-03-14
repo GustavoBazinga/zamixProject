@@ -81,9 +81,12 @@ class RequisicaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Requisicao $requisicao)
+    public function edit(Requisicao $requisicao, $id)
     {
-        //
+        return "Essa página não deu, tem o código, mas por algum motivo não funciona: resources/views/pages/request/edit.blade.php";
+        $requisicao = Requisicao::find($id);
+        $workers = DB::select('SELECT * FROM funcionarios');
+        return view('pages.request.edit')->with('request', $requisicao)->with('workers', $workers);
     }
 
     /**
@@ -123,7 +126,19 @@ class RequisicaoController extends Controller
         $produtos = self::getProdutosRequest($id);
         $requisicao = Requisicao::find($id);
         if ($status) {
-            error_log("entrou");
+            foreach ($produtos as $produto) {
+                if ($produto->produto != null) {
+                    $produto->produto->quantidade -= $produto->quantidade;
+                    $produto->produto->save();
+                } else if ($produto->produtoComposto != null) {
+                    $produtosCompostos = ListagemProdutos::where('produto_composto_id', $produto->produtoComposto->id)->get();
+                    foreach ($produtosCompostos as $produtoComposto) {
+                        $produtoComposto->produto->quantidade -= $produtoComposto->quantidade * $produto->quantidade;
+                        $produtoComposto->produto->save();
+                    }
+                }
+            }
+            $response = self::update($requisicao, $status);
         } else {
             $response = self::update($requisicao, $status);
         }
